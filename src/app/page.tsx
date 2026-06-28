@@ -74,10 +74,10 @@ export default function Home() {
     }
   }, [selected]);
 
-  if (!loaded) return <div className="h-dvh w-full bg-neutral-950" />;
+  if (!loaded) return <div className="h-dvh w-full bg-[#04070b]" />;
 
   return (
-    <main className="relative h-dvh w-full overflow-hidden bg-neutral-950 text-neutral-100">
+    <main className="relative h-dvh w-full overflow-hidden bg-[#04070b] text-[#eaf2f9]">
       <MapView
         aircraft={filtered}
         selectedHex={selectedHex}
@@ -91,15 +91,8 @@ export default function Home() {
       />
 
       {/* Top bar */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between gap-2 p-3">
-        <div className="pointer-events-auto flex items-center gap-2">
-          <button
-            onClick={() => setSidebarOpen((s) => !s)}
-            className="rounded-xl bg-neutral-950/90 px-3 py-2.5 text-sm backdrop-blur ring-1 ring-white/10 hover:bg-neutral-900"
-            title="Toggle list"
-          >
-            ☰
-          </button>
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start gap-2 p-[22px]">
+        <div className="pointer-events-auto">
           <TopBar
             settings={settings}
             update={update}
@@ -114,7 +107,7 @@ export default function Home() {
 
       {/* Sidebar */}
       {sidebarOpen && (
-        <div className="absolute left-3 top-20 z-10 hidden h-[calc(100dvh-6rem)] w-80 overflow-hidden rounded-xl ring-1 ring-white/10 sm:block">
+        <div className="absolute left-[22px] top-[96px] z-10 hidden h-[calc(100dvh-20rem)] min-h-[280px] w-[328px] sm:block">
           <Sidebar
             aircraft={filtered}
             selectedHex={selectedHex}
@@ -122,13 +115,27 @@ export default function Home() {
             home={home}
             onSelect={setSelectedHex}
             onSearch={handleSearch}
+            onToggle={() => setSidebarOpen(false)}
           />
         </div>
       )}
 
+      {/* Reopen list button */}
+      {!sidebarOpen && (
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="skd-glass absolute left-[22px] top-[96px] z-10 hidden h-[44px] w-[44px] items-center justify-center rounded-[12px] text-[#aebccb] hover:text-white sm:flex"
+          title="Show list"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+          </svg>
+        </button>
+      )}
+
       {/* Detail panel */}
       {selected && (
-        <div className="absolute right-3 top-20 z-30 h-[calc(100dvh-6rem)] w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-xl ring-1 ring-white/10">
+        <div className="absolute right-[22px] top-[22px] z-30 h-[calc(100dvh-2.75rem)] w-[360px] max-w-[calc(100vw-1.5rem)]">
           <DetailPanel
             aircraft={selected}
             settings={settings}
