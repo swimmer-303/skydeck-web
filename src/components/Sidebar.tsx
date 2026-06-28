@@ -53,19 +53,15 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
   }, [aircraft, query, sort, home]);
 
   return (
-    <div className="skd-glass flex h-full flex-col overflow-hidden rounded-[15px]">
+    <div className="skd-glass flex h-full flex-col overflow-hidden rounded-[18px]">
       {/* header */}
-      <div className="flex items-center justify-between px-4 pb-[11px] pt-[15px]">
-        <div className="flex items-baseline gap-2">
-          <span style={{ fontFamily: "var(--font-ui)", fontWeight: 600, fontSize: 11, letterSpacing: "0.2em", color: "#8a98a8" }}>
-            AIRCRAFT
-          </span>
-          <span className="font-mono-tab" style={{ fontWeight: 600, fontSize: 11, color: "#2BD4F5" }}>
-            {list.length}
-          </span>
+      <div className="flex items-center justify-between px-[18px] pb-3 pt-4">
+        <div className="flex items-baseline gap-[9px]">
+          <span style={{ fontWeight: 600, fontSize: 11, letterSpacing: "0.14em", color: "#8a8178" }}>AIRCRAFT</span>
+          <span className="tnum" style={{ fontWeight: 600, fontSize: 11, color: "#2e6ca6" }}>{list.length}</span>
         </div>
-        <button onClick={onToggle} className="text-[#7a8a9a] transition hover:text-white" title="Hide list" aria-label="Hide list">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+        <button onClick={onToggle} className="text-[#9a9085] transition hover:text-[#5a5247]" title="Hide list" aria-label="Hide list">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
             <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
           </svg>
         </button>
@@ -73,10 +69,10 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
 
       {/* search */}
       <div
-        className="mx-[14px] mb-3 flex h-[38px] items-center gap-[9px] rounded-[10px] px-3"
-        style={{ background: "rgba(4,8,13,0.55)", border: "1px solid rgba(255,255,255,0.07)", boxShadow: "inset 0 1px 2px rgba(0,0,0,0.4)" }}
+        className="mx-[16px] mb-[13px] flex h-10 items-center gap-2.5 rounded-[12px] px-[13px]"
+        style={{ background: "rgba(34,28,22,0.045)", border: "1px solid rgba(34,28,22,0.07)" }}
       >
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6f7e8e" strokeWidth="1.7" strokeLinecap="round">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9a9085" strokeWidth="1.7" strokeLinecap="round">
           <circle cx="11" cy="11" r="7" />
           <path d="M21 21l-4.3-4.3" />
         </svg>
@@ -87,27 +83,26 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
             if (e.key === "Enter" && query.trim()) onSearch(query.trim());
           }}
           placeholder="Search callsign, type, squawk…"
-          className="w-full bg-transparent text-[#e9f0f7] outline-none placeholder:text-[#5d6b7a]"
-          style={{ fontFamily: "var(--font-mono)", fontWeight: 500, fontSize: 12 }}
+          className="w-full bg-transparent text-[#221e1a] outline-none placeholder:text-[#a89e93]"
+          style={{ fontWeight: 500, fontSize: 12.5 }}
         />
       </div>
 
       {/* sort */}
-      <div className="mx-[14px] mb-3 flex gap-1">
+      <div className="mx-[16px] mb-[13px] flex gap-1.5">
         {(["dist", "alt", "speed", "callsign"] as SortKey[]).map((k) => {
           const active = sort === k;
           return (
             <button
               key={k}
               onClick={() => setSort(k)}
-              className="flex-1 rounded-[7px] py-[5px] text-center capitalize transition"
+              className="flex-1 rounded-[9px] py-1.5 text-center capitalize transition"
               style={{
-                fontFamily: "var(--font-mono)",
                 fontWeight: 600,
-                fontSize: 9.5,
-                letterSpacing: "0.04em",
-                color: active ? "#04121a" : "#6f7e8e",
-                background: active ? "linear-gradient(180deg,#33d6f5,#16b4d6)" : "rgba(255,255,255,0.03)",
+                fontSize: 10,
+                letterSpacing: "0.02em",
+                color: active ? "#fff" : "#7c736a",
+                background: active ? "#2e6ca6" : "rgba(34,28,22,0.04)",
               }}
             >
               {k}
@@ -117,7 +112,7 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
       </div>
 
       {/* list */}
-      <div className="flex-1 overflow-y-auto border-t border-white/[0.05]">
+      <div className="flex-1 overflow-y-auto" style={{ borderTop: "1px solid rgba(34,28,22,0.06)" }}>
         {list.map((a) => {
           const title = a.flight?.trim() || a.registration || a.hex.toUpperCase();
           const emrg = isEmergency(a);
@@ -128,35 +123,32 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
             <button
               key={a.hex}
               onClick={() => onSelect(a.hex)}
-              className={`flex w-full items-center gap-[11px] py-[9px] pl-[11px] pr-[13px] text-left transition ${emrg ? "skd-rowemrg" : "hover:bg-white/5"}`}
+              className={`flex w-full items-center gap-3 py-[11px] pl-3 pr-[14px] text-left transition ${emrg ? "skd-rowemrg" : "hover:bg-[rgba(34,28,22,0.04)]"}`}
               style={{
-                borderLeft: `2px solid ${selected ? "#2BD4F5" : emrg ? "#ef4444" : "transparent"}`,
-                background: selected ? "rgba(45,212,245,0.10)" : undefined,
-                borderBottom: "1px solid rgba(255,255,255,0.035)",
+                borderLeft: `2px solid ${selected ? "#2e6ca6" : emrg ? "#c7453b" : "transparent"}`,
+                background: selected ? "rgba(46,108,166,0.10)" : undefined,
+                borderBottom: "1px solid rgba(34,28,22,0.05)",
               }}
             >
-              <div
-                className="flex-none rounded-[2px]"
-                style={{ width: 3, height: 30, background: emrg ? "#f87171" : band, boxShadow: `0 0 7px ${emrg ? "rgba(248,113,113,.6)" : band}` }}
-              />
+              <div className="flex-none rounded-full" style={{ width: 9, height: 9, background: emrg ? "#f87171" : band }} />
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-[7px]">
-                  <span className="truncate" style={{ fontFamily: "var(--font-ui)", fontWeight: 600, fontSize: 13.5, color: "#e9f0f7", letterSpacing: "0.01em" }}>
+                <div className="flex items-center gap-2">
+                  <span className="truncate" style={{ fontWeight: 600, fontSize: 14, color: selected ? "#1a2733" : "#221e1a" }}>
                     {title}
                   </span>
-                  {emrg && <Tag bg="rgba(239,68,68,.18)" color="#fca5a5">EMRG</Tag>}
-                  {mil && !emrg && <Tag bg="rgba(245,158,11,.16)" color="#fbbf24">MIL</Tag>}
+                  {emrg && <Tag bg="rgba(199,69,59,.14)" color="#b23a31">EMRG</Tag>}
+                  {mil && !emrg && <Tag bg="rgba(176,123,28,.14)" color="#9a6a16">MIL</Tag>}
                 </div>
-                <div className="mt-1 truncate" style={{ fontFamily: "var(--font-mono)", fontWeight: 500, fontSize: 10.5, color: "#6f7e8e", letterSpacing: "0.02em" }}>
+                <div className="mt-1 truncate" style={{ fontWeight: 500, fontSize: 11, color: selected ? "#5e6b78" : "#8a8178" }}>
                   {a.type || "—"}
                   {a.operator ? ` · ${a.operator}` : ""}
                 </div>
               </div>
               <div className="flex-none text-right">
-                <div className="font-mono-tab" style={{ fontWeight: 600, fontSize: 12.5, color: "#cdd9e6" }}>
+                <div className="tnum" style={{ fontWeight: 600, fontSize: 13, color: selected ? "#23323f" : "#3a342d" }}>
                   {fmtAltitude(a.altBaro, settings.units, a.onGround)}
                 </div>
-                <div className="mt-1 font-mono-tab" style={{ fontWeight: 500, fontSize: 10.5, color: "#7a8a9a" }}>
+                <div className="tnum mt-1" style={{ fontWeight: 500, fontSize: 11, color: selected ? "#5e6b78" : "#8a8178" }}>
                   {fmtSpeed(a.gs, settings.units)}
                 </div>
               </div>
@@ -164,14 +156,14 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
           );
         })}
         {list.length === 0 && (
-          <p className="p-6 text-center" style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#566472", lineHeight: 1.6 }}>
+          <p className="p-6 text-center" style={{ fontWeight: 500, fontSize: 11.5, color: "#a89e93", lineHeight: 1.6 }}>
             No aircraft in view. Pan the map, or press Enter to search globally.
           </p>
         )}
       </div>
       <div
-        className="border-t border-white/[0.05] px-4 py-2 text-center uppercase"
-        style={{ fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: "0.16em", color: "#566472" }}
+        className="px-4 py-2 text-center uppercase"
+        style={{ borderTop: "1px solid rgba(34,28,22,0.06)", fontWeight: 600, fontSize: 9, letterSpacing: "0.12em", color: "#a89e93" }}
       >
         {list.length} shown · sorted by {sort}
       </div>
@@ -181,10 +173,7 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
 
 function Tag({ bg, color, children }: { bg: string; color: string; children: React.ReactNode }) {
   return (
-    <span
-      className="rounded-[3px] px-1 py-0.5"
-      style={{ fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: 8, letterSpacing: "0.1em", background: bg, color }}
-    >
+    <span className="rounded-[5px] px-[5px] py-0.5" style={{ fontWeight: 600, fontSize: 8.5, letterSpacing: "0.06em", background: bg, color }}>
       {children}
     </span>
   );

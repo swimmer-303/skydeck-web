@@ -74,10 +74,10 @@ export default function Home() {
     }
   }, [selected]);
 
-  if (!loaded) return <div className="h-dvh w-full bg-[#04070b]" />;
+  if (!loaded) return <div className="h-dvh w-full bg-[#0a0806]" />;
 
   return (
-    <main className="relative h-dvh w-full overflow-hidden bg-[#04070b] text-[#eaf2f9]">
+    <main className="relative h-dvh w-full overflow-hidden bg-[#0a0806] text-[#221e1a]">
       <MapView
         aircraft={filtered}
         selectedHex={selectedHex}
@@ -91,7 +91,7 @@ export default function Home() {
       />
 
       {/* Top bar */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start gap-2 p-[22px]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start gap-2 p-[24px]">
         <div className="pointer-events-auto">
           <TopBar
             settings={settings}
@@ -107,7 +107,7 @@ export default function Home() {
 
       {/* Sidebar */}
       {sidebarOpen && (
-        <div className="absolute left-[22px] top-[96px] z-10 hidden h-[calc(100dvh-20rem)] min-h-[280px] w-[328px] sm:block">
+        <div className="absolute left-[24px] top-[102px] z-10 hidden h-[calc(100dvh-23rem)] min-h-[280px] w-[332px] sm:block">
           <Sidebar
             aircraft={filtered}
             selectedHex={selectedHex}
@@ -124,7 +124,7 @@ export default function Home() {
       {!sidebarOpen && (
         <button
           onClick={() => setSidebarOpen(true)}
-          className="skd-glass absolute left-[22px] top-[96px] z-10 hidden h-[44px] w-[44px] items-center justify-center rounded-[12px] text-[#aebccb] hover:text-white sm:flex"
+          className="skd-glass absolute left-[24px] top-[102px] z-10 hidden h-[44px] w-[44px] items-center justify-center rounded-[14px] text-[#6b6258] hover:text-[#221e1a] sm:flex"
           title="Show list"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -135,7 +135,7 @@ export default function Home() {
 
       {/* Detail panel */}
       {selected && (
-        <div className="absolute right-[22px] top-[22px] z-30 h-[calc(100dvh-2.75rem)] w-[360px] max-w-[calc(100vw-1.5rem)]">
+        <div className="absolute right-[24px] top-[24px] z-30 h-[calc(100dvh-3rem)] w-[366px] max-w-[calc(100vw-1.5rem)]">
           <DetailPanel
             aircraft={selected}
             settings={settings}
