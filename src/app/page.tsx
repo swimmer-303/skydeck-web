@@ -107,7 +107,7 @@ export default function Home() {
 
       {/* Sidebar */}
       {sidebarOpen && (
-        <div className="absolute left-[24px] top-[102px] z-10 hidden h-[calc(100dvh-23rem)] min-h-[280px] w-[332px] sm:block">
+        <div className="absolute left-[24px] top-[102px] z-10 hidden w-[332px] sm:block">
           <Sidebar
             aircraft={filtered}
             selectedHex={selectedHex}

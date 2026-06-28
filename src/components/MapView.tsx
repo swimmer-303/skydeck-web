@@ -18,7 +18,9 @@ interface Props {
   flyTo: { lat: number; lon: number; zoom?: number } | null;
 }
 
-const STYLE = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
+// Light, detailed, Apple-Maps-like basemap — pairs with the porcelain chrome
+// and reads far better than the near-black dark-matter style.
+const STYLE = "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";
 
 // A crisp plane silhouette pointing north (up), drawn to a canvas for use as an
 // SDF icon so MapLibre can tint (icon-color) and rotate (icon-rotate) per plane.
@@ -139,11 +141,11 @@ export default function MapView({
         source: "selected",
         paint: {
           "circle-radius": 18,
-          "circle-color": "#38bdf8",
-          "circle-opacity": 0.18,
-          "circle-stroke-color": "#38bdf8",
+          "circle-color": "#2e6ca6",
+          "circle-opacity": 0.15,
+          "circle-stroke-color": "#2e6ca6",
           "circle-stroke-width": 1.5,
-          "circle-stroke-opacity": 0.8,
+          "circle-stroke-opacity": 0.85,
         },
       });
 
@@ -180,9 +182,9 @@ export default function MapView({
           "text-optional": true,
         },
         paint: {
-          "text-color": "#e5e7eb",
-          "text-halo-color": "#0a0a0a",
-          "text-halo-width": 1.4,
+          "text-color": "#2b2620",
+          "text-halo-color": "#faf8f4",
+          "text-halo-width": 1.6,
         },
       });
 

@@ -53,7 +53,7 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
   }, [aircraft, query, sort, home]);
 
   return (
-    <div className="skd-glass flex h-full flex-col overflow-hidden rounded-[18px]">
+    <div className="skd-glass flex flex-col overflow-hidden rounded-[18px]">
       {/* header */}
       <div className="flex items-center justify-between px-[18px] pb-3 pt-4">
         <div className="flex items-baseline gap-[9px]">
@@ -111,8 +111,8 @@ export default function Sidebar({ aircraft, selectedHex, settings, home, onSelec
         })}
       </div>
 
-      {/* list */}
-      <div className="flex-1 overflow-y-auto" style={{ borderTop: "1px solid rgba(34,28,22,0.06)" }}>
+      {/* list — hugs content when short, scrolls (and stays clear of the legend) when long */}
+      <div className="max-h-[calc(100dvh-35rem)] min-h-[64px] overflow-y-auto" style={{ borderTop: "1px solid rgba(34,28,22,0.06)" }}>
         {list.map((a) => {
           const title = a.flight?.trim() || a.registration || a.hex.toUpperCase();
           const emrg = isEmergency(a);
